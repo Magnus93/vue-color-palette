@@ -8,15 +8,25 @@ function handleColorChange(event: Event, index: number) {
   console.log(event, index)
   colors.value[index] = (event?.target as HTMLInputElement).value ?? colors.value[index]
 }
+function remove(index: number) {
+  colors.value = [...colors.value.slice(0, index), ...colors.value.slice(index+1, colors.value.length)]
+}
+function add() {
+  colors.value.push("#000000")
+}
 </script>
 
 <template>
-  <ul class="greetings">
-    <li v-for="(color, index) in colors" :key="index" :data-color="color" :style="{ backgroundColor: color }">
-      <label>{{ color }}</label>
-      <input type="color" :value="color" @change="event => handleColorChange(event, index)"/>
-    </li>
-  </ul>
+  <div class="wrapper">
+    <ul class="palette">
+      <li v-for="(color, index) in colors" :key="index" :data-color="color" :style="{ backgroundColor: color }">
+        <label>{{ color }}</label>
+        <input type="color" :value="color" @change="event => handleColorChange(event, index)"/>
+        <button type="button" class="remove" @click="() => remove(index)">Remove</button>
+      </li>
+    </ul>
+    <button type="button" class="add" @click="add">+</button>
+  </div>
 </template>
 
 <style scoped>
@@ -33,5 +43,40 @@ li {
   width: 100%;
   height: 100%;
   color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+label {
+  background-color: #ffffff88;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+}
+button {
+  all: unset;
+  cursor: pointer;
+}
+button.remove {
+  background-color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+}
+div.wrapper {
+  position: relative;
+}
+button.add {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  color: black;
+  background-color: white;
+  opacity: 0.4;
+  font-size: 3rem;
+  padding: 0 1rem;
+}
+button.add:hover {
+  opacity: 1;
 }
 </style>
