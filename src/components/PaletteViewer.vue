@@ -20,8 +20,8 @@ function add() {
   <div class="wrapper">
     <ul class="palette">
       <li v-for="(color, index) in colors" :key="index" :data-color="color" :style="{ backgroundColor: color }">
-        <label>{{ color }}</label>
-        <input type="color" :value="color" @change="event => handleColorChange(event, index)"/>
+        <label :for="'color'+index">{{ color }}</label>
+        <input type="color" :id="'color'+index" :value="color" @change="event => handleColorChange(event, index)"/>
         <button type="button" class="remove" @click="() => remove(index)">Remove</button>
       </li>
     </ul>
@@ -52,6 +52,9 @@ label {
   background-color: #ffffff88;
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
+}
+input[type=color] {
+  display: none;
 }
 button {
   all: unset;
