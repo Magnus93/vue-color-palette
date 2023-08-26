@@ -4,7 +4,7 @@ import {Color} from "../Color"
 defineProps<{
   msg: string
 }>()
-const colors = ref(["#ff0000", "#00ff00", "#ff00ff", "#00ffff"])
+const colors = ref(["#aa0000", "#00aa00", "#880088", "#008888"])
 function handleColorChange(event: Event, index: number) {
   console.log(event, index)
   colors.value[index] = (event?.target as HTMLInputElement).value ?? colors.value[index]
@@ -14,6 +14,9 @@ function remove(index: number) {
 }
 function add() {
   colors.value.push("#000000")
+}
+function copy(color: string) {
+  navigator.clipboard.writeText(color)
 }
 </script>
 
@@ -26,6 +29,7 @@ function add() {
         <label :for="'color'+index">{{ Color.HSL.toString(Color.HSL.fromHex(color)) }}</label>
         <input type="color" :id="'color'+index" :value="color" @change="event => handleColorChange(event, index)"/>
         <button type="button" class="remove" @click="() => remove(index)">Remove</button>
+        <button type="button" class="copy" @click="() => copy(color)">Copy</button>
       </li>
     </ul>
     <button type="button" class="add" @click="add">+</button>
@@ -63,7 +67,8 @@ button {
   all: unset;
   cursor: pointer;
 }
-button.remove {
+button.remove,
+button.copy {
   background-color: white;
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
