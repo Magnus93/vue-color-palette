@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {ref} from "vue"
+import {Color} from "../Color"
 defineProps<{
   msg: string
 }>()
@@ -21,6 +22,8 @@ function add() {
     <ul class="palette">
       <li v-for="(color, index) in colors" :key="index" :data-color="color" :style="{ backgroundColor: color }">
         <label :for="'color'+index">{{ color }}</label>
+        <label :for="'color'+index">{{ Color.RGB.toString(Color.RGB.fromHex(color)) }}</label>
+        <label :for="'color'+index">{{ Color.HSL.toString(Color.HSL.fromHex(color)) }}</label>
         <input type="color" :id="'color'+index" :value="color" @change="event => handleColorChange(event, index)"/>
         <button type="button" class="remove" @click="() => remove(index)">Remove</button>
       </li>
