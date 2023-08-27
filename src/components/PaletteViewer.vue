@@ -37,10 +37,13 @@ function copy(color: string) {
 </template>
 
 <style scoped>
+div.wrapper {
+  height: 100%;
+}
 ul {
   all: unset;
   display: flex;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   flex-flow: row;
 }

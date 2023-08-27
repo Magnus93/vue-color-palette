@@ -38,7 +38,8 @@ export namespace Color {
       return { hue, saturation, lightness }
     }
     export function toHex(color: RGB): string {
-      const hexValue = (value: number) => Math.round(value).toString(16).padStart(2, '0').slice(2)
+      const hexValue = (value: number) =>
+        Math.round(value).toString(16).padStart(2, '0').substring(0, 2)
       return `#${hexValue(color.red)}${hexValue(color.green)}${hexValue(color.blue)}`
     }
     export function fromHex(color: string) {
