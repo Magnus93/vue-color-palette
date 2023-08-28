@@ -15,11 +15,11 @@ onMounted(() => {
   }
 })
 function drawWheel(ctx: CanvasRenderingContext2D) {
-  ctx.lineWidth = 12
+  ctx.lineWidth = 10
   for(let deg=0; deg < 360; deg += 0.5) {
-    const radStart = deg*(2*Math.PI)/360
+    const radStart = (deg-1)*(2*Math.PI)/360
     const radEnd = (deg+1)*(2*Math.PI)/360
-    for (let radius = 0; radius < wheel.radius; radius += 5) {
+    for (let radius = 1; radius < wheel.radius; radius += 5) {
       const color = {hue: deg, saturation: 1, lightness: 0.5*(1-radius/150)+0.5}
       ctx.strokeStyle = Color.RGB.toHex(Color.HSL.toRGB(color))
       ctx.beginPath()
